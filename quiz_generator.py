@@ -88,20 +88,20 @@ class CreateQuiz(tk.Frame):
         return entry
 
     def save_question(self):
-        q = self.entry_question.get().strip()
-        a = self.entry_a.get().strip()
-        b = self.entry_b.get().strip()
-        c = self.entry_c.get().strip()
-        d = self.entry_d.get().strip()
+        question = self.entry_question.get().strip()
+        option_a = self.entry_a.get().strip()
+        option_b = self.entry_b.get().strip()
+        option_c = self.entry_c.get().strip()
+        option_d = self.entry_d.get().strip()
         correct = self.var_correct.get()
 
-        if not all([q, a, b, c, d, correct]):
+        if not all([question, option_a, option_b, option_c, option_d, correct]):
             messagebox.showwarning("Missing Info", "Please fill in all fields and select the correct answer.")
             return
 
         quiz_data = {
-            "question": q,
-            "choices": {"a": a, "b": b, "c": c, "d": d},
+            "question": question,
+            "choices": {"a": option_a, "b": option_b, "c": option_c, "d": option_d},
             "answer": correct
         }
 
@@ -127,9 +127,9 @@ class TakeQuiz(tk.Frame):
         self.var_choice = tk.StringVar()
         self.buttons = {}
         for opt in ['a', 'b', 'c', 'd']:
-            b = tk.Radiobutton(self, text="", variable=self.var_choice, value=opt, anchor="w", justify="left")
-            b.pack(fill='x', padx=50, pady=2)
-            self.buttons[opt] = b
+            button = tk.Radiobutton(self, text="", variable=self.var_choice, value=opt, anchor="w", justify="left")
+            button.pack(fill='x', padx=50, pady=2)
+            self.buttons[opt] = button
 
         tk.Button(self, text="Submit Answer", command=self.check_answer).pack(pady=10)
         tk.Button(self, text="↩️ Return to Menu", command=self.back_to_menu).pack()
